@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raj Indulkar - Robotics Engineer</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-color: #0284c7;
+            --secondary-color: #1e293b;
+            --accent-color: #38bdf8;
+            --text-dark: #f1f5f9;
+            --text-light: #94a3b8;
+            --bg-deep: #030712;
+            --transition: all 0.3s ease;
+        }
+
+        /* =========================
+           PREMIUM ROBOTICS BACKGROUND
+           ========================= */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-deep);
+            /* Technical Grid Background */
+            background-image: 
+                linear-gradient(rgba(2, 132, 199, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(2, 132, 199, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, #0f172a 0%, #030712 100%);
+            background-size: 40px 40px, 40px 40px, auto;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* Animated "Scanning" Laser Line */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0.3;
+            z-index: 999;
+            animation: scanLine 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanLine {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        /* Background Glow Blobs */
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+            backdrop-filter: blur(15px);
+            position: relative;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        header .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        header a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        header a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        nav {
+            background: rgba(3, 7, 18, 0.9);
+            padding: 1rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        nav button {
+            background: none;
+            border: 1px solid transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-family: monospace;
+        }
+
+        nav button:hover, nav button.active {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background: rgba(2, 132, 199, 0.1);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section { display: none; animation: fadeIn 0.5s ease-in-out; }
+        section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+            font-family: monospace;
+        }
+
+        /* PREMIUM GLASS CARDS */
+        .about-content, .education-item, .experience-item, .skill-category, .project-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .about-content:hover, .experience-item:hover, .project-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(2, 132, 199, 0.2);
+        }
+
+        .about-content p { margin-bottom: 1rem; color: #cbd5e1; }
+
+        .education-item h3, .experience-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .details {
+            font-family: monospace;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(2, 132, 199, 0.15);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin: 0.2rem;
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            font-family: monospace;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            transition: var(--transition);
+            font-family: monospace;
+        }
+
+        .btn-primary { background: var(--primary-color); color: white; }
+        .btn-secondary { border: 1px solid var(--primary-color); color: var(--accent-color); margin-left: 0.5rem; }
+        
+        .btn:hover { transform: translateY(-2px); filter: brightness(1.2); }
+
+        .loading { text-align: center; color: var(--accent-color); font-family: monospace; }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow" style="top: -10%; left: -10%;"></div>
+    <div class="bg-glow" style="bottom: -10%; right: -10%;"></div>
+
+    <header>
+        <h1>Raj Indulkar</h1>
+        <p class="subtitle">Robotics Engineer</p>
+        <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">📍 Based in Lübeck, Germany</p>
+
+        <div class="contact-info">
+            <a href="mailto:rajindulkar7@gmail.com">📧 rajindulkar7@gmail.com</a>
+            <a href="https://github.com/rajindulkar22" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+            <a href="https://www.linkedin.com/in/rajindulkar7" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+        </div>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" data-section="about">About</button>
+        <button class="nav-btn" data-section="projects">Projects</button>
+        <button class="nav-btn" data-section="skills">Skills</button>
+        <button class="nav-btn" data-section="experience">Experience</button>
+    </nav>
+
+    <div class="container">
+        <section id="about" class="active">
+            <h2 class="section-title">About Me</h2>
+
+            <div class="about-content">
+                <p>
+                    I'm a Master's student in Robotics and Autonomous Systems at Universität zu Lübeck.
+                    With a background in Mechatronics Engineering, I bring a unique blend of mechanical and software expertise to robotics development.
+                </p>
+                <p>
+                    Currently, I'm working as a Research Assistant at the University Hospital Schleswig-Holstein (UKSH) on mobile robot navigation,
+                    while also developing IoT projects at my university. My passion lies in building autonomous systems that solve real-world challenges across various domains.
+                </p>
+                <p>
+                    I'm comfortable with Python, ROS2, and various robotics frameworks. I pick up new concepts quickly, appreciate collaborative feedback,
+                    and am eager to take on challenging projects that push the boundaries of what's possible in robotics and autonomous systems.
+                </p>
+            </div>
+
+            <h3 style="color: var(--accent-color); margin-top: 2rem; margin-bottom: 1.5rem; font-family: monospace;">Education</h3>
+
+            <div class="education-item">
+                <h3>Master of Science in Robotics and Autonomous Systems (Medical Robotics)</h3>
+                <div class="details">Universität zu Lübeck, Germany | Oct 2024 — Present</div>
+            </div>
+
+            <div class="education-item">
+                <h3>Bachelor of Technology in Mechatronics Engineering</h3>
+                <div class="details">SVKM's NMIMS MPSTME, Mumbai, India | Aug 2021 — Aug 2024</div>
+            </div>
+
+            <div class="education-item">
+                <h3>Diploma in Mechanical Engineering</h3>
+                <div class="details">Thakur Polytechnic, Mumbai, India | Aug 2018 — Aug 2021</div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="loading">
+                <p>INITIALIZING GITHUB_FETCH...</p>
+            </div>
+            <div class="projects-grid"></div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Robotics & Control</h3>
+                    <div>
+                        <span class="skill-tag">ROS2 Humble</span>
+                        <span class="skill-tag">Gazebo</span>
+                        <span class="skill-tag">RViz</span>
+                        <span class="skill-tag">Nav2</span>
+                        <span class="skill-tag">SLAM</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">MATLAB/Simulink</span>
+                        <span class="skill-tag">Computer Vision</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Embedded & Hardware</h3>
+                    <div>
+                        <span class="skill-tag">Raspberry Pi</span>
+                        <span class="skill-tag">Pixhawk</span>
+                        <span class="skill-tag">ESP32</span>
+                        <span class="skill-tag">LoRaWAN</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Design Tools</h3>
+                    <div>
+                        <span class="skill-tag">Git/GitHub</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">SolidWorks</span>
+                        <span class="skill-tag">Ubuntu/Linux</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+
+            <div class="experience-item">
+                <h3>Research Assistant - Mobile Robotics</h3>
+                <div class="details">UKSH, Lübeck | Sep 2025 — Present</div>
+                <p>Working on mobile robots specializing in navigation, developing autonomous navigation systems for healthcare applications.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Research Assistant - IoT Projects</h3>
+                <div class="details">Universität zu Lübeck | Apr 2025 — Present</div>
+                <p>Developing Internet of Things projects, integrating embedded systems with cloud platforms.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Machine Design & Assembly Intern</h3>
+                <div class="details">Sorting Swans Ecosocial, India | Dec 2023 — Apr 2024</div>
+                <p>Designed and assembled a battery deposit and exchange machine. Worked on mechanical design and CAD modeling.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>SYSTEM STATUS: OPERATIONAL | &copy; 2026 RAJ INDULKAR</p>
+    </footer>
+
+    <script>
+        // Navigation logic
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+
+                e.target.classList.add('active');
+                const section = document.getElementById(e.target.dataset.section);
+                section.classList.add('active');
+
+                if (e.target.dataset.section === 'projects') {
+                    loadGitHubProjects();
+                }
+            });
+        });
+
+        // GitHub API Fetch
+        async function loadGitHubProjects() {
+            const projectsGrid = document.querySelector('.projects-grid');
+            const loading = document.querySelector('.loading');
+
+            try {
+                const response = await fetch('https://api.github.com/users/rajindulkar22/repos?sort=updated&per_page=12');
+                const repos = await response.json();
+                const filteredRepos = repos.filter(repo => !repo.fork);
+
+                loading.style.display = 'none';
+                projectsGrid.innerHTML = filteredRepos.map(repo => `
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 style="color: var(--accent-color)">${repo.name}</h3>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">${repo.description || 'GitHub Robotics Repository'}</p>
+                        <div style="margin-bottom: 1rem;">
+                            <span class="skill-tag">${repo.language || 'Documentation'}</span>
+                        </div>
+                        <a href="${repo.html_url}" target="_blank" class="btn btn-primary">SOURCE_CODE</a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                loading.innerHTML = '<p>FAILED TO SYNC WITH GITHUB</p>';
+            }
+        }
+
+        // Initialize projects if direct link
+        window.addEventListener('load', () => {
+            if (document.getElementById('projects').classList.contains('active')) {
+                loadGitHubProjects();
+            }
+        });
+    </script>
+</body>
+</html>
